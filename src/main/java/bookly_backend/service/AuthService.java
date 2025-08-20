@@ -7,6 +7,7 @@ import bookly_backend.dto.UserResponseDTO;
 import bookly_backend.entity.UserEntity;
 import bookly_backend.repository.UserRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -18,12 +19,18 @@ public class AuthService {
     private final UserRepository userRepository;
     private final JwtService jwtService;
 
-    public UserResponseDTO register(RegisterDTO registerDTO) {
+    public AuthResponseDTO register(RegisterDTO registerDTO) {
         UserEntity user = new UserEntity();
+        if(userRepository.existsByEmail(registerDTO.getEmail())){
+            throw new RuntimeException("Email déjà utilisé");
+        }
         user.setUsername(registerDTO.getUsername());
         user.setEmail(registerDTO.getEmail());
         user.setPassword(passwordEncoder.encode(registerDTO.getPassword()));
-        return new UserResponseDTO(user);
+        userRepository.save(user);
+
+        String token = jwtService.generateToken(user.getUsername());
+        return new AuthResponseDTO(token);
     }
 
     public AuthResponseDTO login(LoginDTO loginDTO) {
@@ -32,7 +39,7 @@ public class AuthService {
         if (!passwordEncoder.matches(loginDTO.getPassword(), user.getPassword())) {
             throw new RuntimeException("Mot de passe incorrect");
         }
-        String token = jwtService.generateToken(user.getEmail());
+        String token = jwtService.generateToken(user.getUsername());
         return new AuthResponseDTO(token);
     }
 }
