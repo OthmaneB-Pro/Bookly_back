@@ -1,11 +1,14 @@
 package bookly_backend.service;
 
+import bookly_backend.entity.UserEntity;
 import bookly_backend.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @AllArgsConstructor
 @Service
@@ -17,5 +20,9 @@ public class UserService implements UserDetailsService {
         return userRepository.findByUsername(username).orElseThrow(
                 () -> new UsernameNotFoundException("username not found : "+ username)
         );
+    }
+
+    public List<UserEntity> getAllUser() {
+        return this.userRepository.findAll();
     }
 }
