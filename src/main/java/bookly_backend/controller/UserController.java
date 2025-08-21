@@ -3,9 +3,7 @@ package bookly_backend.controller;
 import bookly_backend.entity.UserEntity;
 import bookly_backend.service.UserService;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,5 +17,10 @@ public class UserController {
     @GetMapping
     public List<UserEntity> getAllUser(){
         return this.userService.getAllUser();
+    }
+
+    @GetMapping("/{id}")
+    public UserEntity getUserById(@PathVariable Long id){
+        return this.userService.getUserById(id);
     }
 }

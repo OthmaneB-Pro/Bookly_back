@@ -25,4 +25,8 @@ public class UserService implements UserDetailsService {
     public List<UserEntity> getAllUser() {
         return this.userRepository.findAll();
     }
+
+    public UserEntity getUserById(Long id) {
+        return this.userRepository.findById(id).orElseThrow(() -> new UsernameNotFoundException("Utilisateur non trouvé"));
+    }
 }
