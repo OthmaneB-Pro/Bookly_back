@@ -4,6 +4,7 @@ import bookly_backend.dto.AuthResponseDTO;
 import bookly_backend.dto.LoginDTO;
 import bookly_backend.dto.RegisterDTO;
 import bookly_backend.entity.UserEntity;
+import bookly_backend.enums.Role;
 import bookly_backend.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -26,6 +27,7 @@ public class AuthService {
         user.setUsername(registerDTO.getUsername());
         user.setEmail(registerDTO.getEmail());
         user.setPassword(passwordEncoder.encode(registerDTO.getPassword()));
+        user.setRole(Role.USER);
         userRepository.save(user);
 
         String token = jwtService.generateToken(user.getUsername());

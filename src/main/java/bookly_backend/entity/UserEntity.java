@@ -1,5 +1,6 @@
 package bookly_backend.entity;
 
+import bookly_backend.enums.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,6 +26,8 @@ public class UserEntity implements UserDetails {
     private String username;
     private String email;
     private String password;
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
