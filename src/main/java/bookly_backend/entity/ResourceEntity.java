@@ -1,6 +1,7 @@
 package bookly_backend.entity;
 
 import bookly_backend.enums.Type;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,5 +28,6 @@ public class ResourceEntity {
     private Date date;
     private Boolean availability;
     @ManyToOne
-    private UserEntity userId;
+    @JoinColumn(name = "user_id")
+    private UserEntity user;
 }
