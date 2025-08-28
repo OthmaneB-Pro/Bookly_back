@@ -2,10 +2,13 @@ package bookly_backend.security;
 
 import bookly_backend.entity.ResourceEntity;
 import bookly_backend.entity.UserEntity;
+import bookly_backend.enums.Type;
 import bookly_backend.repository.ResourceRepository;
 import bookly_backend.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.Date;
 
 @AllArgsConstructor
 @Service
@@ -19,13 +22,15 @@ public class ResourceService {
         System.out.println("User : "+ resource.getUser());
         if(resource.getUser() == null || resource.getUser().getId() == 0){
             throw new Exception("Utilisateur introuvable 1");
-            
+
         }
 
         UserEntity user = userService.getUserById(resource.getUser().getId());
         if(user == null){
             throw new Exception("Utilisateur introuvable 2");
         }
+        resource.setType(resource.getType() != null ? resource.getType() : Type.ROOM);
+        resource.setDate(new Date());
         resource.setUser(user);
         resourceRepository.save(resource);
     }

@@ -1,7 +1,6 @@
 package bookly_backend.entity;
 
 import bookly_backend.enums.Type;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,7 +19,7 @@ public class ResourceEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private Type type;
     private String title;
     private String description;
