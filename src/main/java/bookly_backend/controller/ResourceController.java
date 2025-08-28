@@ -4,10 +4,7 @@ import bookly_backend.entity.ResourceEntity;
 import bookly_backend.security.ResourceService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @AllArgsConstructor
 @RestController
@@ -20,5 +17,15 @@ public class ResourceController {
         public ResponseEntity<String> createResource(@RequestBody ResourceEntity resource) throws Exception {
         this.resourceService.createResource(resource);
         return ResponseEntity.ok("Bien crée");
+    }
+    @DeleteMapping(path = "/{id}")
+    public ResponseEntity<String> deleteResource(@PathVariable Long id) throws Exception{
+        this.resourceService.deleteResource(id);
+        return ResponseEntity.ok("La ressource à été supprimé avec succès");
+    }
+    @PutMapping(path = "/{id}")
+    public ResponseEntity<String> updateResource(@PathVariable Long id, @RequestBody ResourceEntity resource) throws Exception{
+        this.resourceService.updateResource(id, resource);
+        return ResponseEntity.ok("La ressource est mis à jour avec succès");
     }
 }
