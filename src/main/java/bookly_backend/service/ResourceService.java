@@ -1,10 +1,9 @@
-package bookly_backend.security;
+package bookly_backend.service;
 
 import bookly_backend.entity.ResourceEntity;
 import bookly_backend.entity.UserEntity;
 import bookly_backend.enums.Type;
 import bookly_backend.repository.ResourceRepository;
-import bookly_backend.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

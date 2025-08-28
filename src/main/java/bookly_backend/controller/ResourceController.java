@@ -1,7 +1,7 @@
 package bookly_backend.controller;
 
 import bookly_backend.entity.ResourceEntity;
-import bookly_backend.security.ResourceService;
+import bookly_backend.service.ResourceService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
