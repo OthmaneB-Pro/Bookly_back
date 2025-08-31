@@ -5,6 +5,7 @@ import bookly_backend.entity.UserEntity;
 import bookly_backend.enums.Type;
 import bookly_backend.repository.ResourceRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,12 +22,12 @@ public class ResourceService {
 
     public void createResource(ResourceEntity resource) throws Exception {
         if(resource.getUser() == null || resource.getUser().getId() == 0){
-            throw new Exception("Utilisateur introuvable 1");
+            throw new UsernameNotFoundException("Utilisateur introuvable 1");
         }
 
         UserEntity user = userService.getUserById(resource.getUser().getId());
         if(user == null){
-            throw new Exception("Utilisateur introuvable 2");
+            throw new UsernameNotFoundException("Utilisateur introuvable 2");
         }
         resource.setType(resource.getType() != null ? resource.getType() : Type.ROOM);
         resource.setDate(new Date());
