@@ -22,8 +22,6 @@ public class JwtService {
 
     public String generateToken(String username){
         long now = System.currentTimeMillis();
-        System.out.println("Jwt secret "+ secret);
-        System.out.println("username "+ username);
         return Jwts.builder()
                 .setSubject(username)
                 .setIssuedAt(new Date(now))
