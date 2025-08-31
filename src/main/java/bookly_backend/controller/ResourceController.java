@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @AllArgsConstructor
 @RestController
 @RequestMapping("resource")
@@ -27,5 +29,10 @@ public class ResourceController {
     public ResponseEntity<String> updateResource(@PathVariable Long id, @RequestBody ResourceEntity resource) throws Exception{
         this.resourceService.updateResource(id, resource);
         return ResponseEntity.ok("La ressource est mis à jour avec succès");
+    }
+
+    @GetMapping
+    public List<ResourceEntity> findAllResource(){
+        return this.resourceService.findAllResource();
     }
 }

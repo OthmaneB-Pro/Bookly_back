@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @AllArgsConstructor
@@ -62,5 +63,9 @@ public class ResourceService {
         else {
             throw new Exception("Resource introuvable");
         }
+    }
+
+    public List<ResourceEntity> findAllResource() {
+        return this.resourceRepository.findAll();
     }
 }
