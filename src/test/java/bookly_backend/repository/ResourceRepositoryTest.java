@@ -72,4 +72,5 @@ class ResourceRepositoryTest {
         assertThat(newResource.getTitle()).isEqualTo("Burger");
         assertThat(newResource.getUser().getId()).isEqualTo(savedUser.getId());
     }
+
 }
